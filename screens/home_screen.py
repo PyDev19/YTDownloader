@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter.ttk import Progressbar, Style
 import app
+from functions import download_video
 
 
 def load(root):
@@ -38,5 +39,14 @@ def load(root):
 
     download_progress_bar = Progressbar(root, orient=VERTICAL, length=100, mode='determinate')
     download_progress_bar.place(relx=0.675, rely=0.125, relheight=0.75, relwidth=0.25)
+
+    download_progress_label = Label(root, bg="#ff0000", fg="#fff", text="", font=('Courier New', 20))
+    download_progress_label.place(relx=0.675, rely=0.9, relheight=0.09, relwidth=0.25)
+
+    download_button = Button(root, bg="#ff0000", fg="#fff", activebackground="#181818", activeforeground="#ff0000",
+                             text="Download Video!", font=('Courier New', 20),
+                             command=lambda: download_video.download_video(download_entry.get(), file_name_entry.get(),
+                                                                           download_path_entry.get()))
+    download_button.place(relx=0.01, rely=0.5, relheight=0.075, relwidth=0.6)
 
     app.root.bind("<Return>", lambda args: app.root.focus_set())
