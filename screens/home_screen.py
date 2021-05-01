@@ -45,8 +45,8 @@ def load(root):
 
     download_button = Button(root, bg="#ff0000", fg="#fff", activebackground="#181818", activeforeground="#ff0000",
                              text="Download Video!", font=('Courier New', 20),
-                             command=lambda: download_video.download_video(download_entry.get(), file_name_entry.get(),
-                                                                           download_path_entry.get()))
+                             command=lambda: download_video.download_video(download_entry, download_path_entry,
+                                                                           file_name_entry))
     download_button.place(relx=0.01, rely=0.5, relheight=0.075, relwidth=0.6)
 
     app.root.bind("<Return>", lambda args: app.root.focus_set())
