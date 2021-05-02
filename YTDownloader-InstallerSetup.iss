@@ -5,6 +5,8 @@
 #define MyAppVersion "1"
 #define MyAppPublisher "Atharva Mishra"
 #define MyAppURL "https://github.com/YamiAtem/YTDownloader"
+#define MyAppSupportURL "https://yamiatem.github.io/YTDownloader/"
+#define MyAppUpdatesURL "https://github.com/YamiAtem/YTDownloader/releases"
 #define MyAppExeName "main.exe"
 
 [Setup]
@@ -16,8 +18,8 @@ AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
-AppSupportURL={#MyAppURL}
-AppUpdatesURL={#MyAppURL}
+AppSupportURL={#MyAppSupportURL}
+AppUpdatesURL={#MyAppUpdatesURL}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
@@ -39,7 +41,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "C:\Users\User\Desktop\PythonProjects\YTDownloader\dist\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\YTDownloader\dist\resources\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\User\Desktop\PythonProjects\YTDownloader\dist\main\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
