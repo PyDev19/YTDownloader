@@ -3,7 +3,7 @@ from tkinter.ttk import Notebook, Style
 
 root = Tk()
 root.geometry("800x600")
-root.iconbitmap("icon.ico")
+root.iconbitmap("icons/icon.ico")
 root.title("YT Downloader")
 
 style = Style()
