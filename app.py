@@ -9,12 +9,5 @@ root.title("YT Downloader")
 style = Style()
 style.layout('TNotebook.Tab', [])
 
-tabs = Notebook(root)
-tabs.pack(fill='both', expand=1)
-
-# screens
-home_screen = Canvas(root, bg="#181818")
-home_screen.pack(fill='both', expand=1)
-
-# added screens
-tabs.add(home_screen)
+main_frame = Frame(root, bg="#181818")
+main_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
