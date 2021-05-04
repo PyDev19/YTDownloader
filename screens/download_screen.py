@@ -4,7 +4,6 @@ from tkinter.messagebox import showerror
 
 import requests
 import pytube
-import time
 
 
 def load(root, app_root, download_icon):
