@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.ttk import Notebook, Style
+from screens import download_screen
 
 # root of app
 root = Tk()
@@ -7,8 +8,10 @@ root.geometry("800x600")
 root.iconbitmap("icons/icon.ico")
 root.title("YT Downloader")
 
-# icon for menu button
+# icons
 menu_icon = PhotoImage(file="images/menu.png")
+download_icon = PhotoImage(file="images/download.png")
+
 nav_bar_active = False
 
 
@@ -69,6 +72,9 @@ settings_screen.place(relx=0, rely=0, relwidth=1, relheight=1)
 tabs.add(home_screen)
 tabs.add(convert_screen)
 tabs.add(settings_screen)
+
+# Load Screens
+download_screen.load(home_screen, root, download_icon)
 
 # Frame for Menu Button and Tittle
 title_frame = Frame(main_frame, bg="#181818")
