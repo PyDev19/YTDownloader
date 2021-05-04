@@ -4,3 +4,4 @@ dist/
 *.exe
 *spec
 build/
+*.mp4
