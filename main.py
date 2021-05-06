@@ -83,6 +83,7 @@ tabs.add(screen_3)
 
 # load screens
 home_screen.load(screen, app_icon)
+download_screen.load(screen_2, root)
 
 # menu frame
 menu_frame = Frame(main, bg="#21252B")
@@ -93,11 +94,12 @@ menu_button = Button(menu_frame, menu_buttons_style, image=menu_icon, text="Hide
 menu_button.grid(column=0, row=0)
 
 # home button
-home_button = Button(menu_frame, menu_buttons_style, image=home_icon, text="Home")
+home_button = Button(menu_frame, menu_buttons_style, image=home_icon, text="Home", command=lambda: tabs.select(0))
 home_button.grid(column=0, row=1)
 
 # download button
-download_button = Button(menu_frame, menu_buttons_style, image=download_icon, text="Download")
+download_button = Button(menu_frame, menu_buttons_style, image=download_icon, text="Download",
+                         command=lambda: tabs.select(1))
 download_button.grid(column=0, row=2)
 
 root.mainloop()
