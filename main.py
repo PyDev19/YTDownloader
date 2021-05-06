@@ -17,10 +17,11 @@ x, y = round(root.winfo_screenwidth() / 5), round(root.winfo_screenheight() / 15
 root.geometry("800x600+{}+{}".format(x, y))
 
 # icons
-menu_icon = PhotoImage(file="images/menu.png")
-home_icon = PhotoImage(file="images/home.png")
-download_icon = PhotoImage(file="images/download.png")
+menu_icon = PhotoImage(file="icons/menu.png")
+home_icon = PhotoImage(file="icons/home.png")
+download_icon = PhotoImage(file="icons/download.png")
 app_icon = PhotoImage(file="images/yt_downloader.png")
+github_icon = PhotoImage(file="icons/github.png")
 
 # dicts of widgets
 menu_buttons_style: dict = dict(compound=LEFT, bd=0, bg="#21252B", fg="#fff", font=("Courier", 20),
@@ -101,5 +102,9 @@ home_button.grid(column=0, row=1)
 download_button = Button(menu_frame, menu_buttons_style, image=download_icon, text="Download",
                          command=lambda: tabs.select(1))
 download_button.grid(column=0, row=2)
+
+# github button
+github_button = Button(menu_frame, menu_buttons_style, image=download_icon, text="GitHub")
+github_button.grid(column=0, row=2)
 
 root.mainloop()
