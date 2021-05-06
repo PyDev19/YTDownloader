@@ -6,16 +6,15 @@ import requests
 import pytube
 
 
-def load(root, app_root, download_icon):
+def load(root, app_root):
     # function for adding placeholder text to entry
     def add_placeholder_text(text: str, entry):
         if len(entry.get()) == 0:
             entry.insert(0, text)
 
     # Widget styles
-    download_button_style: dict = dict(bd=0, bg="#ff0000", fg="#181818", activebackground="#181818",
-                                       activeforeground="#ff0000", text="Download Video", image=download_icon,
-                                       compound=LEFT,
+    download_button_style: dict = dict(bd=0, bg="#343B48", fg="#fff", activebackground="#181818",
+                                       activeforeground="#343B48", text="Download Video", compound=LEFT,
                                        font=("Courier", 25))
 
     # YouTube link entry
@@ -65,6 +64,7 @@ def download_video(link, output, file_name, progress_bar, progress_label, root):
     progress_label.place(relx=0.375, rely=0.75, relwidth=0.25)
     progress_bar.place(relx=0.25, rely=0.7, relwidth=0.5)
 
+    # checks to see if user is connected to the internet
     url = "https://yamiatem.github.io/YTDownloader/"
     timeout = 5
 
@@ -72,12 +72,43 @@ def download_video(link, output, file_name, progress_bar, progress_label, root):
         request = requests.get(url, timeout=timeout)
     except (requests.ConnectionError, requests.Timeout) as exception:
         showerror("Error", "You are not connected to the internet")
+
+        progress_label.place_forget()
+        progress_bar.place_forget()
+
+        return
+
+    # checks if entries are empty
+    if link == "" or link == "YouTube Link":
+        showerror("Error", "All fields are required")
+
+        progress_label.place_forget()
+        progress_bar.place_forget()
+
+        return
+    elif output == "" or output == "Output Directory":
+        showerror("Error", "All fields are required")
+
+        progress_label.place_forget()
+        progress_bar.place_forget()
+
+        return
+    elif file_name == "" or file_name == "File Name":
+        showerror("Error", "All fields are required")
+
+        progress_label.place_forget()
+        progress_bar.place_forget()
+
         return
 
     try:
         yt = pytube.YouTube(link)
     except:
         showerror("Error", " YouTube video link is invalid")
+
+        progress_label.place_forget()
+        progress_bar.place_forget()
+
         return
 
     video = yt.streams.filter(progressive=True, mime_type="video/mp4", file_extension="mp4").first()
