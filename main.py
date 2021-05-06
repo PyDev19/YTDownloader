@@ -1,43 +1,48 @@
 from tkinter import *
 from tkinter.ttk import Notebook, Style
-from screens import download_screen
 
 # root of app
 root = Tk()
-root.geometry("800x600")
-root.iconbitmap("icons/icon.ico")
+
+# title of app
 root.title("YT Downloader")
+
+# icon of app
+root.iconbitmap("icons/icon.ico")
+
+# geometry of app
+x, y = round(root.winfo_screenwidth() / 5), round(root.winfo_screenheight() / 15)
+root.geometry("800x600+{}+{}".format(x, y))
 
 # icons
 menu_icon = PhotoImage(file="images/menu.png")
+home_icon = PhotoImage(file="images/home.png")
 download_icon = PhotoImage(file="images/download.png")
 
-nav_bar_active = False
+# dicts of widgets
+menu_buttons_style: dict = dict(compound=LEFT, bd=0, bg="#21252B", fg="#fff", font=("Courier", 20),
+                                activebackground="#BD93F9", anchor="w", padx=20, width=300)
+
+# toggle menu bool
+menu_active: bool = False
 
 
-# Function for opening and closing menu
-def nav_menu():
-    global nav_bar_active
-    print(nav_bar_active)
+# open and close of menu
+def toggle_menu():
+    global menu_active
 
-    if not nav_bar_active:
-        nav_bar_active = True
-        for i in range(-1000, 1):
-            print(i)
-            nav_frame.place(x=i)
-            main_frame.update()
+    if not menu_active:
+        for i in range(int(58.4), 301, 5):
+            menu_frame.place(width=i)
+            root.update()
 
-        tabs.place(relx=0.25, relwidth=0.75)
-    else:
-        nav_bar_active = False
-        for i in range(1001):
-            print(-i)
-            nav_frame.place(x=-i)
-            main_frame.update()
+        menu_active = True
+    elif menu_active:
+        for i in range(300, int(56), -2):
+            menu_frame.place(width=i)
+            root.update()
 
-        tabs.place(relx=0, relwidth=1)
-
-    print(nav_bar_active)
+        menu_active = False
 
 
 # Style
@@ -50,62 +55,38 @@ style.layout('TNotebook.Tab', [])
 style.layout("TNotebook", [])
 style.configure("TNotebook", tabmargins=0)
 
-# The Main Frame of Program
-main_frame = Frame(root, bg="#181818")
-main_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+# main frame of app
+main = Frame(root, bg="#282C34")
+main.pack(expand=1, fill="both")
 
-# Created Notebook
-tabs = Notebook(main_frame)
-tabs.place(relx=0, rely=0.1, relwidth=1, relheight=0.9)
+# Notebook
+tabs = Notebook(main)
+tabs.pack(expand=1, fill=BOTH)
 
-# Created Screens
-home_screen = Frame(tabs, bg="#181818")
-home_screen.place(relx=0, rely=0, relwidth=1, relheight=1)
+# create screens
+screen = Frame(tabs, bg="#282C34")
+screen.pack(expand=1, fill="both")
 
-convert_screen = Frame(tabs, bg="#00ff00")
-convert_screen.place(relx=0, rely=0, relwidth=1, relheight=1)
+screen_2 = Frame(tabs, bg="#282C34")
+screen_2.pack(expand=1, fill="both")
 
-settings_screen = Frame(tabs, bg="#0000ff")
-settings_screen.place(relx=0, rely=0, relwidth=1, relheight=1)
+screen_3 = Frame(tabs, bg="#282C34")
+screen_3.pack(expand=1, fill="both")
 
-# Added Screens
-tabs.add(home_screen)
-tabs.add(convert_screen)
-tabs.add(settings_screen)
+# menu_frame
+menu_frame = Frame(main, bg="#21252B")
+menu_frame.place(relx=0, rely=0, relheight=1, width=58.4)
 
-# Load Screens
-download_screen.load(home_screen, root, download_icon)
+# menu button
+menu_button = Button(menu_frame, menu_buttons_style, image=menu_icon, text="Hide", command=lambda: toggle_menu())
+menu_button.grid(column=0, row=0)
 
-# Frame for Menu Button and Tittle
-title_frame = Frame(main_frame, bg="#181818")
-title_frame.place(relx=0, rely=0, relwidth=1, relheight=0.1)
+# home button
+home_button = Button(menu_frame, menu_buttons_style, image=home_icon, text="Home")
+home_button.grid(column=0, row=1)
 
-# Label Tittle
-title_label = Label(title_frame, bg="#ff0000", text="YT Downloader", font=("Courier", 40))
-title_label.place(relx=0, rely=0, relwidth=1, relheight=1)
-
-# Button for Menu
-nav_button = Button(title_frame, image=menu_icon, bg="#ff0000", bd=0, activebackground="#181818",
-                    command=lambda: nav_menu())
-nav_button.place(relx=0, relheight=1)
-
-# Frame of Menu
-nav_frame = Frame(main_frame, bg="#ff0000")
-nav_frame.place(x=-1000, rely=0.1, relwidth=0.25, relheight=0.90)
-
-# Button for Download Screens
-download_button = Button(nav_frame, bg="#181818", fg="#ff0000", activebackground="#ff0000", activeforeground="#181818",
-                         text="Download", bd=0, font=("Courier", 25), command=lambda: tabs.select(0))
-download_button.place(relx=0.05, rely=0.1, relwidth=0.9, relheight=0.1)
-
-# Button for Convert Screen
-convert_button = Button(nav_frame, bg="#181818", fg="#ff0000", activebackground="#ff0000", activeforeground="#181818",
-                        text="Convert", bd=0, font=("Courier", 25), command=lambda: tabs.select(1))
-convert_button.place(relx=0.05, rely=0.25, relwidth=0.9, relheight=0.1)
-
-# Button for Settings Screen
-settings_button = Button(nav_frame, bg="#181818", fg="#ff0000", activebackground="#ff0000", activeforeground="#181818",
-                         text="Settings", bd=0, font=("Courier", 25), command=lambda: tabs.select(2))
-settings_button.place(relx=0.05, rely=0.4, relwidth=0.9, relheight=0.1)
+# download button
+download_button = Button(menu_frame, menu_buttons_style, image=download_icon, text="Download")
+download_button.grid(column=0, row=2)
 
 root.mainloop()
