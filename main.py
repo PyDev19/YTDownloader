@@ -24,6 +24,8 @@ home_icon = PhotoImage(file="icons/home.png")
 download_icon = PhotoImage(file="icons/download.png")
 app_icon = PhotoImage(file="images/yt_downloader.png")
 github_icon = PhotoImage(file="icons/github.png")
+website_icon = PhotoImage(file="icons/website.png")
+update_icon = PhotoImage(file="icons/update.png")
 
 # dicts of widgets
 menu_buttons_style: dict = dict(compound=LEFT, bd=0, bg="#21252B", fg="#fff", font=("Courier", 20),
@@ -110,5 +112,17 @@ github_button = Button(menu_frame, menu_buttons_style, image=github_icon, text="
                        command=lambda: webbrowser.open("https://github.com/YamiAtem/YTDownloader", new=0,
                                                        autoraise=True))
 github_button.grid(column=0, row=3)
+
+# website button
+website_button = Button(menu_frame, menu_buttons_style, image=website_icon, text="App Website",
+                        command=lambda: webbrowser.open("https://yamiatem.github.io/YTDownloader/", new=0,
+                                                        autoraise=True))
+website_button.grid(column=0, row=4)
+
+# update button
+update_button = Button(menu_frame, menu_buttons_style, image=update_icon, text="Latest Update",
+                       command=lambda: webbrowser.open("https://github.com/YamiAtem/YTDownloader/releases",
+                                                       new=0, autoraise=True))
+update_button.grid(column=0, row=5)
 
 root.mainloop()
