@@ -108,16 +108,13 @@ body.typora-export {
         padding-left: 0px;
         padding-right: 0px;
     }
-
     #write {
         padding-left: 20px;
         padding-right: 20px;
     }
-
     .CodeMirror-sizer {
         margin-left: 0px !important;
     }
-
     .CodeMirror-gutters {
         display: none !important;
     }
@@ -467,7 +464,6 @@ li> :first-child {
 }
 
 @media print {
-
     body,
     html {
         border: 1px solid transparent;
@@ -476,27 +472,25 @@ li> :first-child {
         break-before: avoid;
         font-variant-ligatures: no-common-ligatures;
     }
-
     #write {
         margin-top: 0px;
         padding-top: 0px;
         border-color: transparent !important;
     }
-
     .typora-export * {
         -webkit-print-color-adjust: exact;
     }
-
     .typora-export #write {
         break-after: avoid;
     }
-
     .typora-export #write::after {
         height: 0px;
     }
-
     .is-mac table {
         break-inside: avoid;
+    }
+    .typora-export-show-outline .typora-export-sidebar {
+        display: none;
     }
 }
 
@@ -645,15 +639,12 @@ p>.md-image:only-child {
     .md-toc-h3 .md-toc-inner {
         margin-left: 3.5em;
     }
-
     .md-toc-h4 .md-toc-inner {
         margin-left: 5em;
     }
-
     .md-toc-h5 .md-toc-inner {
         margin-left: 6.5em;
     }
-
     .md-toc-h6 .md-toc-inner {
         margin-left: 8em;
     }
@@ -855,7 +846,6 @@ mark .md-meta {
 }
 
 @media print {
-
     .typora-export h1,
     .typora-export h2,
     .typora-export h3,
@@ -931,7 +921,6 @@ mark .md-meta {
 }
 
 @media screen and (max-width: 1024px) {
-
     .typora-export-sidebar,
     .typora-export-sidebar .outline-content {
         width: 240px;
@@ -1098,7 +1087,6 @@ mark .md-meta {
     font-weight: 700;
 }
 
-
 :root {
     --side-bar-bg-color: #fafafa;
     --control-text-color: #777;
@@ -1107,9 +1095,16 @@ mark .md-meta {
 @include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
 
 /* open-sans-regular - latin-ext_latin */
+
+
 /* open-sans-italic - latin-ext_latin */
+
+
 /* open-sans-700 - latin-ext_latin */
+
+
 /* open-sans-700italic - latin-ext_latin */
+
 html {
     font-size: 16px;
 }
@@ -1212,6 +1207,7 @@ h2 {
     line-height: 1.225;
     border-bottom: 1px solid #eee;
 }
+
 
 /*@media print {
 .typora-export h1,
@@ -1373,7 +1369,6 @@ code {
     padding-bottom: 6px;
 }
 
-
 .md-task-list-item>input {
     margin-left: -1.3em;
 }
@@ -1382,12 +1377,10 @@ code {
     html {
         font-size: 13px;
     }
-
     table,
     pre {
         page-break-inside: avoid;
     }
-
     pre {
         word-wrap: break-word;
     }
@@ -1470,7 +1463,9 @@ code {
     border-width: 1px;
 }
 
+
 /** focus mode */
+
 .on-focus-mode blockquote {
     border-left-color: rgba(85, 85, 85, 0.12);
 }
@@ -1495,6 +1490,7 @@ footer {
 .md-lang {
     color: #b4654d;
 }
+
 
 /*.html-for-mac {
 --item-hover-bg-color: #E6F0FE;
