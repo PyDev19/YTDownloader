@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter.ttk import Notebook, Style
+from screens import download_screen
+from screens import home_screen
 
 # root of app
 root = Tk()
@@ -18,6 +20,7 @@ root.geometry("800x600+{}+{}".format(x, y))
 menu_icon = PhotoImage(file="images/menu.png")
 home_icon = PhotoImage(file="images/home.png")
 download_icon = PhotoImage(file="images/download.png")
+app_icon = PhotoImage(file="images/yt_downloader.png")
 
 # dicts of widgets
 menu_buttons_style: dict = dict(compound=LEFT, bd=0, bg="#21252B", fg="#fff", font=("Courier", 20),
@@ -38,7 +41,7 @@ def toggle_menu():
 
         menu_active = True
     elif menu_active:
-        for i in range(300, int(56), -2):
+        for i in range(300, int(56), -3):
             menu_frame.place(width=i)
             root.update()
 
@@ -61,7 +64,7 @@ main.pack(expand=1, fill="both")
 
 # Notebook
 tabs = Notebook(main)
-tabs.pack(expand=1, fill=BOTH)
+tabs.pack(expand=1, fill="both", side="right")
 
 # create screens
 screen = Frame(tabs, bg="#282C34")
@@ -73,7 +76,15 @@ screen_2.pack(expand=1, fill="both")
 screen_3 = Frame(tabs, bg="#282C34")
 screen_3.pack(expand=1, fill="both")
 
-# menu_frame
+# add screens
+tabs.add(screen)
+tabs.add(screen_2)
+tabs.add(screen_3)
+
+# load screens
+home_screen.load(screen, app_icon)
+
+# menu frame
 menu_frame = Frame(main, bg="#21252B")
 menu_frame.place(relx=0, rely=0, relheight=1, width=58.4)
 
