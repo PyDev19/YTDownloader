@@ -3,6 +3,8 @@ from tkinter.ttk import Notebook, Style
 from screens import download_screen
 from screens import home_screen
 
+import webbrowser
+
 # root of app
 root = Tk()
 
@@ -104,7 +106,9 @@ download_button = Button(menu_frame, menu_buttons_style, image=download_icon, te
 download_button.grid(column=0, row=2)
 
 # github button
-github_button = Button(menu_frame, menu_buttons_style, image=download_icon, text="GitHub")
-github_button.grid(column=0, row=2)
+github_button = Button(menu_frame, menu_buttons_style, image=github_icon, text="GitHub",
+                       command=lambda: webbrowser.open("https://github.com/YamiAtem/YTDownloader", new=0,
+                                                       autoraise=True))
+github_button.grid(column=0, row=3)
 
 root.mainloop()
