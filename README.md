@@ -7,7 +7,10 @@ To use this app fist you need to copy and past the link into the first entry box
 Then put the directory where you want the downloaded video to be example: "C:\Users\User\Downloads". Then put the
 file name you want for the downloaded video. Finally, click on the download button and wait for the video to be downloaded.
 ## Example
-![Example of App](images/example_of_app.png)
+![Example of Home Screen](images/home_screen.png)
+![Example of Home Screen Menu](images/home_screen_menu.png)
+![Example of Download Screen](images/download_screen.png)
+![Example of Download Screen Menu](images/download_screen_menu.png)
 ## What I used to make this
 If you want to make apps like this here are some things you need to know or have:
 1. You need to know python (basics for simple apps and advance for more complicated apps)
