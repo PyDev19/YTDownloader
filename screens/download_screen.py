@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter.ttk import Progressbar
+from tkinter.ttk import Progressbar, Style
 from tkinter.messagebox import showerror
 
 import requests
@@ -7,6 +7,10 @@ import pytube
 
 
 def load(root, app_root):
+    # style
+    style = Style()
+    style.configure("red.Horizontal.TProgressbar", troughcolor='gray', background='red')
+
     # function for adding placeholder text to entry
     def add_placeholder_text(text: str, entry):
         if len(entry.get()) == 0:
@@ -51,10 +55,11 @@ def load(root, app_root):
     download_button.place(relx=0.25, rely=0.55, relwidth=0.5)
 
     # Progress bar
-    video_progress_bar = Progressbar(root, orient="horizontal", length=100, mode="determinate")
+    video_progress_bar = Progressbar(root, orient="horizontal", length=100, mode="determinate",
+                                     style="red.Horizontal.TProgressbar")
 
     # Progress bar label
-    video_progress_label = Label(root, text="0%", font=("Courier", 20), bg="#ff0000", fg="#181818")
+    video_progress_label = Label(root, text="0%", font=("Courier", 20), bg="#343B48", fg="#fff")
 
     # Gives focus to main root of app when "enter" key is pressed
     app_root.bind("<Return>", lambda args: app_root.focus_set())
