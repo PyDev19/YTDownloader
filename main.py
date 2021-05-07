@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter.ttk import Notebook, Style
 from screens import download_screen
-from screens import home_screen
 
 import webbrowser
 
@@ -87,7 +86,9 @@ tabs.add(screen_2)
 tabs.add(screen_3)
 
 # load screens
-home_screen.load(screen, app_icon)
+icon_label = Label(screen, bg="#282C34", image=app_icon)
+icon_label.pack(anchor='center', pady=100)
+
 download_screen.load(screen_2, root)
 
 # menu frame
