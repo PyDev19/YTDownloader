@@ -7,10 +7,6 @@ import pytube
 
 
 def load(root, app_root):
-    # style
-    style = Style()
-    style.configure("red.Horizontal.TProgressbar", troughcolor='gray', background='red')
-
     # function for adding placeholder text to entry
     def add_placeholder_text(text: str, entry):
         if len(entry.get()) == 0:
@@ -55,8 +51,7 @@ def load(root, app_root):
     download_button.place(relx=0.25, rely=0.55, relwidth=0.5)
 
     # Progress bar
-    video_progress_bar = Progressbar(root, orient="horizontal", length=100, mode="determinate",
-                                     style="red.Horizontal.TProgressbar")
+    video_progress_bar = Progressbar(root, orient="horizontal", length=100, mode="determinate")
 
     # Progress bar label
     video_progress_label = Label(root, text="0%", font=("Courier", 20), bg="#343B48", fg="#fff")
@@ -76,44 +71,39 @@ def download_video(link, output, file_name, progress_bar, progress_label, root):
     try:
         request = requests.get(url, timeout=timeout)
     except (requests.ConnectionError, requests.Timeout) as exception:
-        showerror("Error", "You are not connected to the internet")
-
         progress_label.place_forget()
         progress_bar.place_forget()
 
+        showerror("Error", "You are not connected to the internet")
         return
 
     # checks if entries are empty
     if link == "" or link == "YouTube Link":
-        showerror("Error", "All fields are required")
-
         progress_label.place_forget()
         progress_bar.place_forget()
 
+        showerror("Error", "All fields are required")
         return
     elif output == "" or output == "Output Directory":
-        showerror("Error", "All fields are required")
-
         progress_label.place_forget()
         progress_bar.place_forget()
 
+        showerror("Error", "All fields are required")
         return
     elif file_name == "" or file_name == "File Name":
-        showerror("Error", "All fields are required")
-
         progress_label.place_forget()
         progress_bar.place_forget()
 
+        showerror("Error", "All fields are required")
         return
 
     try:
         yt = pytube.YouTube(link)
     except:
-        showerror("Error", " YouTube video link is invalid")
-
         progress_label.place_forget()
         progress_bar.place_forget()
 
+        showerror("Error", " YouTube video link is invalid")
         return
 
     video = yt.streams.filter(progressive=True, mime_type="video/mp4", file_extension="mp4").first()
