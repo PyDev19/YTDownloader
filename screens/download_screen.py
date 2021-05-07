@@ -43,11 +43,10 @@ def load(root, app_root):
     file_name_entry.bind("<FocusOut>", lambda args: add_placeholder_text("File Name", file_name_entry))
 
     # download button
-    download_button = Button(root, download_button_style, command=lambda: download_video(link_entry.get(),
-                                                                                         output_directory_entry.get(),
-                                                                                         file_name_entry.get(),
-                                                                                         video_progress_bar,
-                                                                                         video_progress_label, app_root))
+    download_button = Button(root, download_button_style, 
+                             command=lambda: download_video(link_entry.get(), output_directory_entry.get(),
+                                                            file_name_entry.get(), video_progress_bar,
+                                                            video_progress_label, app_root))
     download_button.place(relx=0.25, rely=0.55, relwidth=0.5)
 
     # Progress bar
