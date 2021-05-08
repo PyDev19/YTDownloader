@@ -11,7 +11,7 @@ root = Tk()
 root.title("YT Downloader")
 
 # icon of app
-root.iconbitmap("icons/icon.ico")
+root.iconbitmap("icons/favicon.ico")
 
 # geometry of app
 x, y = round(root.winfo_screenwidth() / 5), round(root.winfo_screenheight() / 15)
@@ -30,7 +30,7 @@ update_icon = PhotoImage(file="icons/update.png")
 icons = [menu_icon, home_icon, download_icon, github_icon, website_icon, update_icon]
 
 # dicts of widgets
-menu_buttons_style: dict = dict(compound=LEFT, bd=0, bg="#21252B", fg="#fff", font=("Courier", 20),
+menu_buttons_style: dict = dict(compound=LEFT, bd=0, bg="#21252B", fg="#fff", font=("Times New Roman", 20),
                                 activebackground="#BD93F9", anchor="w", padx=20, width=300)
 
 # Style
@@ -68,7 +68,7 @@ tabs.add(screen_3)
 
 # load screens
 icon_label = Label(screen, bg="#282C34", image=app_icon)
-icon_label.pack(anchor='center', pady=100)
+icon_label.pack(anchor='center')
 
 download_screen.load(screen_2, root)
 
