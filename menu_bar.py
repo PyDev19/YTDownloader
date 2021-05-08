@@ -31,17 +31,11 @@ def load(main, icons, menu_buttons_style, tabs, root):
                                                            autoraise=True))
     github_button.grid(column=0, row=3)
 
-    # website button
-    website_button = Button(menu_frame, menu_buttons_style, image=icons[4], text="App Website",
-                            command=lambda: webbrowser.open("https://yamiatem.github.io/YTDownloader/", new=0,
-                                                            autoraise=True))
-    website_button.grid(column=0, row=4)
-
     # update button
     update_button = Button(menu_frame, menu_buttons_style, image=icons[5], text="Latest Update",
                            command=lambda: webbrowser.open("https://github.com/YamiAtem/YTDownloader/releases",
                                                            new=0, autoraise=True))
-    update_button.grid(column=0, row=5)
+    update_button.grid(column=0, row=4)
 
 
 # open and close of menu
