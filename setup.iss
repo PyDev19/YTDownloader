@@ -2,10 +2,9 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "YT Downloader"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "2"
 #define MyAppPublisher "Atharva Mishra"
 #define MyAppURL "https://github.com/YamiAtem/YTDownloader"
-#define MyAppSupportURL "https://yamiatem.github.io/YTDownloader/"
 #define MyAppUpdatesURL "https://github.com/YamiAtem/YTDownloader/releases"
 #define MyAppExeName "main.exe"
 
@@ -18,7 +17,7 @@ AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
-AppSupportURL={#MyAppSupportURL}
+AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppUpdatesURL}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
@@ -28,7 +27,7 @@ PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\User\Desktop\PythonProjects\YTDownloader
 OutputBaseFilename=YTDownloader-Installer
-SetupIconFile=C:\Users\User\Desktop\PythonProjects\YTDownloader\icon.ico
+SetupIconFile=C:\Users\User\Desktop\PythonProjects\YTDownloader\icons\favicon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
