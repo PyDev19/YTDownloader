@@ -17,3 +17,5 @@
 5. Changed icon of App
 6. Font changed from Courier to Times New Roman
 
+### Download Version 2.0: [Here](https://github.com/PyDev19/YTDownloader/releases/download/v2.0/YTDownloader-Installer.exe)
+
