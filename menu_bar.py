@@ -8,7 +8,7 @@ menu_active: bool = False
 def load(main, icons, menu_buttons_style, tabs, root):
     # menu frame
     menu_frame = Frame(main, bg="#21252B")
-    menu_frame.place(relx=0, rely=0, relheight=1, width=58.4)
+    menu_frame.place(relx=0, rely=0, relheight=1, width=56)
 
     # menu button
     menu_button = Button(menu_frame, menu_buttons_style, image=icons[0], text="Hide",

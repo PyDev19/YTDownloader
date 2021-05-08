@@ -15,10 +15,10 @@ def load(root, app_root):
     # Widget styles
     download_button_style: dict = dict(bd=0, bg="#343B48", fg="#fff", activebackground="#181818",
                                        activeforeground="#343B48", text="Download Video", compound=LEFT,
-                                       font=("Courier", 25))
+                                       font=("Times New Roman", 25))
 
     # YouTube link entry
-    link_entry = Entry(root, font=('Courier', 30))
+    link_entry = Entry(root, font=('Times New Roman', 30))
     link_entry.insert(0, "YouTube Link")
     link_entry.place(relx=0.125, rely=0.1, relwidth=0.75, relheigh=0.1)
 
@@ -26,7 +26,7 @@ def load(root, app_root):
     link_entry.bind("<FocusOut>", lambda args: add_placeholder_text("YouTube Link", link_entry))
 
     # output directory entry
-    output_directory_entry = Entry(root, font=('Courier', 30))
+    output_directory_entry = Entry(root, font=('Times New Roman', 30))
     output_directory_entry.insert(0, "Output Directory")
     output_directory_entry.place(relx=0.125, rely=0.25, relwidth=0.75, relheigh=0.1)
 
@@ -35,7 +35,7 @@ def load(root, app_root):
                                                                                 output_directory_entry))
 
     # file name entry
-    file_name_entry = Entry(root, font=('Courier', 30))
+    file_name_entry = Entry(root, font=('Times New Roman', 30))
     file_name_entry.insert(0, "File Name")
     file_name_entry.place(relx=0.125, rely=0.4, relwidth=0.75, relheigh=0.1)
 
