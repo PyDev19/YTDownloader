@@ -1,24 +1,31 @@
-from tkinter import *
-from tkinter.ttk import Progressbar, Style
+from tkinter import Tk
+from tkinter.constants import *
 from tkinter.messagebox import showerror
+from tkinter.ttk import *
+from pytube import YouTube, exceptions
 
 import requests
-import pytube
 
 
-def load(root, app_root):
+def load(main: Frame, root: Tk):
+    style = Style()
+
+    # style for download button
+    style.configure("Download.TButton", relief=FLAT, background="#343B48", foreground="#fff",
+                    font=("Times New Roman", 25))
+    style.map("Download.TButton", background=[('pressed', '#BD93F9'), (ACTIVE, '#3c4453')],
+              foreground=[('pressed', '#000'), (ACTIVE, '#fff')])
+
+    # style for download label
+    style.configure("Download.TLabel", font=("Courier", 20), background="#343B48", foreground="#fff", anchor="center")
+
     # function for adding placeholder text to entry
     def add_placeholder_text(text: str, entry):
         if len(entry.get()) == 0:
             entry.insert(0, text)
 
-    # Widget styles
-    download_button_style: dict = dict(bd=0, bg="#343B48", fg="#fff", activebackground="#181818",
-                                       activeforeground="#343B48", text="Download Video", compound=LEFT,
-                                       font=("Times New Roman", 25))
-
     # YouTube link entry
-    link_entry = Entry(root, font=('Times New Roman', 30))
+    link_entry = Entry(main, font=('Times New Roman', 30))
     link_entry.insert(0, "YouTube Link")
     link_entry.place(relx=0.125, rely=0.1, relwidth=0.75, relheigh=0.1)
 
@@ -26,7 +33,7 @@ def load(root, app_root):
     link_entry.bind("<FocusOut>", lambda args: add_placeholder_text("YouTube Link", link_entry))
 
     # output directory entry
-    output_directory_entry = Entry(root, font=('Times New Roman', 30))
+    output_directory_entry = Entry(main, font=('Times New Roman', 30))
     output_directory_entry.insert(0, "Output Directory")
     output_directory_entry.place(relx=0.125, rely=0.25, relwidth=0.75, relheigh=0.1)
 
@@ -35,7 +42,7 @@ def load(root, app_root):
                                                                                 output_directory_entry))
 
     # file name entry
-    file_name_entry = Entry(root, font=('Times New Roman', 30))
+    file_name_entry = Entry(main, font=('Times New Roman', 30))
     file_name_entry.insert(0, "File Name")
     file_name_entry.place(relx=0.125, rely=0.4, relwidth=0.75, relheigh=0.1)
 
@@ -43,20 +50,20 @@ def load(root, app_root):
     file_name_entry.bind("<FocusOut>", lambda args: add_placeholder_text("File Name", file_name_entry))
 
     # download button
-    download_button = Button(root, download_button_style,
+    download_button = Button(main, style="Download.TButton", text="Download Video", takefocus=False,
                              command=lambda: download_video(link_entry.get(), output_directory_entry.get(),
                                                             file_name_entry.get(), video_progress_bar,
-                                                            video_progress_label, app_root))
+                                                            video_progress_label, root))
     download_button.place(relx=0.25, rely=0.55, relwidth=0.5)
 
     # Progress bar
-    video_progress_bar = Progressbar(root, orient="horizontal", length=100, mode="determinate")
+    video_progress_bar = Progressbar(main, orient="horizontal", length=100, mode="determinate")
 
     # Progress bar label
-    video_progress_label = Label(root, text="0%", font=("Courier", 20), bg="#343B48", fg="#fff")
+    video_progress_label = Label(main, text="0%", style="Download.TLabel")
 
     # Gives focus to main root of app when "enter" key is pressed
-    app_root.bind("<Return>", lambda args: app_root.focus_set())
+    root.bind("<Return>", lambda args: root.focus_set())
 
 
 def download_video(link, output, file_name, progress_bar, progress_label, root):
@@ -97,8 +104,9 @@ def download_video(link, output, file_name, progress_bar, progress_label, root):
         return
 
     try:
-        yt = pytube.YouTube(link)
-    except:
+        yt = YouTube(link)
+        root.update()
+    except exceptions.PytubeError as e:
         progress_label.place_forget()
         progress_bar.place_forget()
 
@@ -126,3 +134,4 @@ def download_video(link, output, file_name, progress_bar, progress_label, root):
 
     progress_label.place_forget()
     progress_bar.place_forget()
+

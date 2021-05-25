@@ -1,72 +1,95 @@
+from tkinter import Tk
 import webbrowser
-from tkinter import *
+from tkinter.ttk import *
+from tkinter.constants import *
 
 # toggle menu bool
 menu_active: bool = False
 
 
-def load(main, icons, menu_buttons_style, tabs, root):
+def load(main, icons: list, root, notebook):
+    # style
+    style = Style()
+
+    # style for menu frame
+    style.configure("Menu.TFrame", background="#21252B")
+
+    # style for menu buttons
+    style.configure("Menu.TButton", relief=FLAT, font=("Times New Roman", 20), anchor="w", width=21, foreground="#fff",
+                    padding='12 1 1 1')
+    style.map("Menu.TButton", background=[("pressed", "#BD93F9"), ("!active", "#21252B"), (ACTIVE, "#282C34")])
+
     # menu frame
-    menu_frame = Frame(main, bg="#21252B")
-    menu_frame.place(relx=0, rely=0, relheight=1, width=56)
+    menu_frame = Frame(main, style="Menu.TFrame")
+    menu_frame.place(relx=0, rely=0, relheight=1, width=50)
 
     # menu button
-    menu_button = Button(menu_frame, menu_buttons_style, image=icons[0], text="Hide",
-                         command=lambda: toggle_menu(root, menu_frame))
+    menu_button = Button(menu_frame, style="Menu.TButton", image=icons[0], compound=LEFT, text="  Hide",
+                         takefocus=False,
+                         command=lambda: toggle_menu(root, menu_frame, menu_button, icons))
     menu_button.grid(column=0, row=0)
 
     # home button
-    home_button = Button(menu_frame, menu_buttons_style, image=icons[1], text="Home",
-                         command=lambda: select_screen(tabs, 0, home_button, download_button, menu_frame, root))
+    home_button = Button(menu_frame, style="Menu.TButton", image=icons[2], compound=LEFT, text="  Home",
+                         takefocus=False, command=lambda: select_screen(notebook, 0, icons, root, menu_frame,
+                                                                        menu_button))
     home_button.grid(column=0, row=1)
 
     # download button
-    download_button = Button(menu_frame, menu_buttons_style, image=icons[2], text="Download",
-                             command=lambda: select_screen(tabs, 1, download_button, home_button, menu_frame, root))
+    download_button = Button(menu_frame, style="Menu.TButton", image=icons[3], compound=LEFT, text="  Download Video",
+                             takefocus=False, command=lambda: select_screen(notebook, 1, icons, root, menu_frame,
+                                                                            menu_button))
     download_button.grid(column=0, row=2)
 
     # github button
-    github_button = Button(menu_frame, menu_buttons_style, image=icons[3], text="GitHub",
+    github_button = Button(menu_frame, style="Menu.TButton", image=icons[4], text="  GitHub", compound=LEFT,
                            command=lambda: webbrowser.open("https://github.com/YamiAtem/YTDownloader", new=0,
                                                            autoraise=True))
     github_button.grid(column=0, row=3)
 
     # update button
-    update_button = Button(menu_frame, menu_buttons_style, image=icons[5], text="Latest Update",
+    update_button = Button(menu_frame, style="Menu.TButton", image=icons[5], text="  Latest Update", compound=LEFT,
                            command=lambda: webbrowser.open("https://github.com/YamiAtem/YTDownloader/releases",
                                                            new=0, autoraise=True))
     update_button.grid(column=0, row=4)
 
 
 # open and close of menu
-def toggle_menu(root, menu_frame):
+def toggle_menu(root: Tk, menu_frame: Frame, menu_button: Button, icons: list):
     global menu_active
 
     if not menu_active:
-        for i in range(int(58.4), 301, 5):
-            menu_frame.place(width=i)
+        menu_button.configure(image=icons[1])
+
+        for i in range(1, 7):
+            width = i * 50
+            menu_frame.place(width=width)
             root.update()
 
         menu_active = True
     elif menu_active:
-        for i in range(300, int(56), -3):
-            menu_frame.place(width=i)
+        menu_button.configure(image=icons[0])
+
+        for i in range(1, 7):
+            width = 350 - (i * 50)
+            menu_frame.place(width=width)
             root.update()
 
         menu_active = False
 
 
-# switch to home screen
-def select_screen(tabs, index, button, button_2, frame, root):
+# switch screens
+def select_screen(tabs, index, icons, root, menu_frame, menu_button):
     global menu_active
 
     tabs.select(index)
-    button.configure(bg="#282C34")
-    button_2.configure(bg="#21252B")
 
     if menu_active:
-        for i in range(300, int(56), -3):
-            frame.place(width=i)
+        menu_button.configure(image=icons[0])
+
+        for i in range(1, 7):
+            width = 350 - (i * 50)
+            menu_frame.place(width=width)
             root.update()
 
         menu_active = False
