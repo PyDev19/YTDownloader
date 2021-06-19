@@ -1,8 +1,3 @@
-/.idea
+.idea/
 *.pyc
-dist/
-*.exe
-*spec
-build/
-*.mp4
 requirements.txt
