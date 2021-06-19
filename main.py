@@ -1,82 +1,65 @@
-from tkinter import Canvas, Tk, PhotoImage
-from tkinter.ttk import *
-from screens import download_screen
-import menu_bar
+import sys
 
-# root of app
-root = Tk()
+from PySide6 import QtCore, QtGui, QtWidgets
 
-# geometry of app
-x, y = round(root.winfo_screenwidth() / 5), round(root.winfo_screenheight() / 15)
-root.geometry("800x600+{}+{}".format(x, y))
+from menu_bar import MenuBar
+from screens.home_screen import HomeScreen
 
-# title of app
-root.title("YT Downloader")
 
-# icon of app
-root.iconbitmap("icons/favicon.ico")
+# window resize event
+def window_resize(event):
+    menu_bar.menu_frame.setGeometry(0, 0, menu_bar.menu_frame.width(), window.height())
 
-# icons
-menu_icon = PhotoImage(file="icons/menu.png")
-menu_icon_2 = PhotoImage(file="icons/menu_2.png")
-home_icon = PhotoImage(file="icons/home.png")
-download_icon = PhotoImage(file="icons/download.png")
-app_icon = PhotoImage(file="yt_downloader.png")
-github_icon = PhotoImage(file="icons/github.png")
-website_icon = PhotoImage(file="icons/website.png")
-update_icon = PhotoImage(file="icons/update.png")
 
-# icons array
-icons = [menu_icon, menu_icon_2, home_icon, download_icon, github_icon, website_icon, update_icon]
+app = QtWidgets.QApplication(sys.argv)
 
-# style
-style = Style()
+# set app stylesheet
+with open("main.qss", "r") as file:
+    style = file.read()
+    app.setStyleSheet(style)
 
-# theme
-style.theme_use("clam")
+window = QtWidgets.QWidget()
+window.setWindowTitle("YT Downloader")
 
-# Style for Notebook Tabs
-style.layout('TNotebook.Tab', [])
+# screen size
+screen = app.primaryScreen()
+screen_size = screen.size()
 
-# Style for Notebook
-style.layout("TNotebook", [])
-style.configure("TNotebook", tabmargins=0)
+# set window geometry
+x = screen_size.width() / 2 - 800 / 2
+y = screen_size.height() / 2 - 600 / 2
+window.setGeometry(int(x), int(y), 800, 600)
 
-# Style for main frame
-style.configure("Main.TFrame", background="#282C34")
+# set window title
+window.setWindowTitle("GraphiNator")
 
-# Style for Screens
-style.configure("Screens.TFrame", background="#282C34")
+# set window icon
+icon = QtGui.QIcon(r"icons\icon.ico")
+window.setWindowIcon(icon)
 
-# Style for icon label
-style.configure("Icon.TLabel", background="#282C34", image=app_icon)
+# main frame layout
+main_layout = QtWidgets.QHBoxLayout(window)
+main_layout.setContentsMargins(QtCore.QMargins(0, 0, 0, 0))
 
-# main frame of app
-main = Frame(root, style="Main.TFrame")
-main.pack(expand=1, fill="both")
+# main frame
+main_frame = QtWidgets.QFrame(window)
+main_frame.setObjectName("mainFrame")
+main_layout.addWidget(main_frame)
 
-# Notebook
-tabs = Notebook(main)
-tabs.pack(expand=1, fill="both")
+# stacked widget
+stacked_widget_layout = QtWidgets.QHBoxLayout(main_frame)
+stacked_widget_layout.setContentsMargins(0, 0, 0, 0)
+stacked_widget = QtWidgets.QStackedWidget(main_frame)
+stacked_widget_layout.addWidget(stacked_widget)
 
-# create screens
-screen = Frame(tabs, style="Screens.TFrame")
-screen.pack(expand=1, fill="both")
+# Home screen
+home_screen = HomeScreen(stacked_widget)
 
-screen_2 = Frame(tabs, style="Screens.TFrame")
-screen_2.pack(expand=1, fill="both")
+# menu bar
+menu_bar = MenuBar(main_frame, window, app)
 
-# add screens
-tabs.add(screen)
-tabs.add(screen_2)
+# window resize
+window.resizeEvent = window_resize
 
-# load screens
-icon_label = Label(screen, style="Icon.TLabel")
-icon_label.pack(anchor='center')
-
-download_screen.load(screen_2, root)
-
-# load menu bar
-menu_bar.load(main, icons, root, tabs)
-
-root.mainloop()
+window.show()
+sys.exit(app.exec_())
