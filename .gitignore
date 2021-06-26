@@ -1,3 +1,4 @@
 .idea/
 *.pyc
 requirements.txt
+node_modules/*
