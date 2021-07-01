@@ -1,0 +1,26 @@
+QLineEdit.downloadScreenEntry {
+    font-size: 30pt;
+    font-family: "Times New Roman";
+}
+
+QPushButton.downloadScreenButton {
+    font-size: 25pt;
+    background-color: #343B48;
+    font-family: "Times New Roman";
+    border: 0;
+    color: #FFFFFF;
+    padding: 10px;
+}
+
+QPushButton.downloadScreenButton:hover {
+    background-color: #3c4453;
+}
+
+QPushButton.downloadScreenButton:pressed {
+    background-color: #BD93F9;
+    color: #000000;
+}
+
+QProgressBar#progressBar {
+    color: #000000;
+}
