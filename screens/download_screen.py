@@ -1,137 +1,120 @@
-from tkinter import Tk
-from tkinter.constants import *
-from tkinter.messagebox import showerror
-from tkinter.ttk import *
-from pytube import YouTube, exceptions
+import ctypes
 
 import requests
+from PySide6 import QtWidgets, QtCore, QtGui
+from pytube import YouTube, exceptions
 
 
-def load(main: Frame, root: Tk):
-    style = Style()
+class DownloadScreen:
+    def __init__(self, stacked_widget, app):
+        self.stacked_widget = stacked_widget
+        self.app = app
+        self.output_directory = ""
 
-    # style for download button
-    style.configure("Download.TButton", relief=FLAT, background="#343B48", foreground="#fff",
-                    font=("Times New Roman", 25))
-    style.map("Download.TButton", background=[('pressed', '#BD93F9'), (ACTIVE, '#3c4453')],
-              foreground=[('pressed', '#000'), (ACTIVE, '#fff')])
+        self.download_screen_frame_layout = QtWidgets.QHBoxLayout()
+        self.download_screen_frame_layout.setContentsMargins(0, 0, 0, 0)
+        self.download_screen_frame = QtWidgets.QFrame()
+        self.download_screen_frame_layout.addWidget(self.download_screen_frame)
 
-    # style for download label
-    style.configure("Download.TLabel", font=("Courier", 20), background="#343B48", foreground="#fff", anchor="center")
+        self.entry_layout = QtWidgets.QVBoxLayout(self.download_screen_frame)
+        self.entry_layout.setContentsMargins(150, -1, 150, 250)
 
-    # function for adding placeholder text to entry
-    def add_placeholder_text(text: str, entry):
-        if len(entry.get()) == 0:
-            entry.insert(0, text)
+        self.link_entry = QtWidgets.QLineEdit(self.download_screen_frame)
+        self.link_entry.setPlaceholderText("YouTube Video Link")
+        self.link_entry.setProperty("class", "downloadScreenEntry")
+        self.entry_layout.addWidget(self.link_entry)
 
-    # YouTube link entry
-    link_entry = Entry(main, font=('Times New Roman', 30))
-    link_entry.insert(0, "YouTube Link")
-    link_entry.place(relx=0.125, rely=0.1, relwidth=0.75, relheigh=0.1)
+        self.filename_entry = QtWidgets.QLineEdit(self.download_screen_frame)
+        self.filename_entry.setPlaceholderText("File Name")
+        self.filename_entry.setProperty("class", "downloadScreenEntry")
+        self.entry_layout.addWidget(self.filename_entry)
 
-    link_entry.bind("<FocusIn>", lambda args: link_entry.delete('0', 'end'))
-    link_entry.bind("<FocusOut>", lambda args: add_placeholder_text("YouTube Link", link_entry))
+        self.output_button = QtWidgets.QPushButton(self.download_screen_frame)
+        self.output_button.setText("Choose Output Folder")
+        self.output_button.setProperty("class", "downloadScreenButton")
+        self.output_button.clicked.connect(lambda: self.choose_directory())
+        self.entry_layout.addWidget(self.output_button)
 
-    # output directory entry
-    output_directory_entry = Entry(main, font=('Times New Roman', 30))
-    output_directory_entry.insert(0, "Output Directory")
-    output_directory_entry.place(relx=0.125, rely=0.25, relwidth=0.75, relheigh=0.1)
+        self.download_button = QtWidgets.QPushButton(self.download_screen_frame)
+        self.download_button.setText("Download Video")
+        self.download_button.setProperty("class", "downloadScreenButton")
+        self.download_button.clicked.connect(lambda: self.download_video())
+        self.entry_layout.addWidget(self.download_button)
 
-    output_directory_entry.bind("<FocusIn>", lambda args: output_directory_entry.delete('0', 'end'))
-    output_directory_entry.bind("<FocusOut>", lambda args: add_placeholder_text("Output Directory",
-                                                                                output_directory_entry))
+        self.progress_bar = QtWidgets.QProgressBar(self.download_screen_frame)
+        self.progress_bar.setOrientation(QtCore.Qt.Orientation.Horizontal)
+        self.progress_bar.setValue(0)
+        self.progress_bar.setAlignment(QtCore.Qt.AlignCenter)
+        self.progress_bar.setFont(QtGui.QFont('Times New Roman', 25))
+        self.progress_bar.hide()
+        self.entry_layout.addWidget(self.progress_bar)
 
-    # file name entry
-    file_name_entry = Entry(main, font=('Times New Roman', 30))
-    file_name_entry.insert(0, "File Name")
-    file_name_entry.place(relx=0.125, rely=0.4, relwidth=0.75, relheigh=0.1)
+        self.stacked_widget.addWidget(self.download_screen_frame)
 
-    file_name_entry.bind("<FocusIn>", lambda args: file_name_entry.delete('0', 'end'))
-    file_name_entry.bind("<FocusOut>", lambda args: add_placeholder_text("File Name", file_name_entry))
+    def choose_directory(self):
+        dialog = QtWidgets.QFileDialog()
+        dialog.setDirectory(r"C:\Users\User\Desktop")
+        self.output_directory = dialog.getExistingDirectory(None, "Select Output Folder")
 
-    # download button
-    download_button = Button(main, style="Download.TButton", text="Download Video", takefocus=False,
-                             command=lambda: download_video(link_entry.get(), output_directory_entry.get(),
-                                                            file_name_entry.get(), video_progress_bar,
-                                                            video_progress_label, root))
-    download_button.place(relx=0.25, rely=0.55, relwidth=0.5)
+    def download_video(self):
+        url = "https://yamiatem.github.io/YTDownloader/"
+        timeout = 5
+        link = self.link_entry.text()
+        file_name = self.filename_entry.text()
+        output_dir = self.output_directory
+        self.progress_bar.show()
+        self.app.processEvents()
 
-    # Progress bar
-    video_progress_bar = Progressbar(main, orient="horizontal", length=100, mode="determinate")
+        try:
+            request = requests.get(url, timeout=timeout)
+        except (requests.ConnectionError, requests.Timeout) as exception:
+            self.progress_bar.hide()
+            ctypes.windll.user32.MessageBoxW(0, "You are not connected to the internet", "Error", 0)
+            return
 
-    # Progress bar label
-    video_progress_label = Label(main, text="0%", style="Download.TLabel")
+        if link == "":
+            self.progress_bar.hide()
+            ctypes.windll.user32.MessageBoxW(0, "Youtube link is required", "Error", 0)
+            return
+        elif file_name == "":
+            self.progress_bar.hide()
+            ctypes.windll.user32.MessageBoxW(0, "File name is required", "Error", 0)
+            return
+        elif file_name == "":
+            self.progress_bar.hide()
+            ctypes.windll.user32.MessageBoxW(0, "File name is required", "Error", 0)
+            return
+        elif output_dir == "":
+            self.progress_bar.hide()
+            ctypes.windll.user32.MessageBoxW(0, "Output directory is required", "Error", 0)
+            return
 
-    # Gives focus to main root of app when "enter" key is pressed
-    root.bind("<Return>", lambda args: root.focus_set())
+        try:
+            yt = YouTube(link)
+        except exceptions.PytubeError as e:
+            self.progress_bar.hide()
+            ctypes.windll.user32.MessageBoxW(0, "YouTube video link is invalid", "Error", 0)
+            return
 
+        self.app.processEvents()
 
-def download_video(link, output, file_name, progress_bar, progress_label, root):
-    progress_label.place(relx=0.375, rely=0.75, relwidth=0.25)
-    progress_bar.place(relx=0.25, rely=0.7, relwidth=0.5)
+        video = yt.streams.filter(progressive=True, mime_type="video/mp4", file_extension="mp4").first()
+        file_size = video.filesize
 
-    # checks to see if user is connected to the internet
-    url = "https://yamiatem.github.io/YTDownloader/"
-    timeout = 5
+        self.app.processEvents()
 
-    try:
-        request = requests.get(url, timeout=timeout)
-    except (requests.ConnectionError, requests.Timeout) as exception:
-        progress_label.place_forget()
-        progress_bar.place_forget()
+        def video_progress(chunk, file_handler, bytes_remaining):
+            percent = abs(round((float(bytes_remaining) / float(file_size) * float(100)) - 100))
+            self.progress_bar.setValue(percent)
+            self.app.processEvents()
 
-        showerror("Error", "You are not connected to the internet")
-        return
+        yt.register_on_progress_callback(video_progress)
+        video.download(output_path=output_dir, filename=file_name)
 
-    # checks if entries are empty
-    if link == "" or link == "YouTube Link":
-        progress_label.place_forget()
-        progress_bar.place_forget()
+        self.app.processEvents()
 
-        showerror("Error", "All fields are required")
-        return
-    elif output == "" or output == "Output Directory":
-        progress_label.place_forget()
-        progress_bar.place_forget()
+        self.progress_bar.reset()
+        self.progress_bar.hide()
+        ctypes.windll.user32.MessageBoxW(0, "Done Downloading Video!", "Info", 0)
 
-        showerror("Error", "All fields are required")
-        return
-    elif file_name == "" or file_name == "File Name":
-        progress_label.place_forget()
-        progress_bar.place_forget()
-
-        showerror("Error", "All fields are required")
-        return
-
-    try:
-        yt = YouTube(link)
-        root.update()
-    except exceptions.PytubeError as e:
-        progress_label.place_forget()
-        progress_bar.place_forget()
-
-        showerror("Error", " YouTube video link is invalid")
-        return
-
-    video = yt.streams.filter(progressive=True, mime_type="video/mp4", file_extension="mp4").first()
-    file_size = video.filesize
-
-    def video_progress(chunk, file_handler, bytes_remaining):
-        percent = abs(round((float(bytes_remaining)/float(file_size) * float(100)) - 100))
-        print(percent)
-
-        progress_bar['value'] = percent
-        progress_label.configure(text=str(percent)+"%")
-
-        if percent == 100:
-            progress_label.configure(text="DONE!")
-
-        root.update()
-
-    yt.register_on_progress_callback(video_progress)
-
-    video.download(output_path=output, filename=file_name)
-
-    progress_label.place_forget()
-    progress_bar.place_forget()
-
+        self.app.processEvents()
