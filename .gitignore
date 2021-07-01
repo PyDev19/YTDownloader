@@ -1,5 +1,5 @@
-.idea/
-*.pyc
-requirements.txt
+.idea/*
 node_modules/*
 build/*
+
+*.pyc
