@@ -1,0 +1,62 @@
+QFrame#menuFrame {
+    background-color: #21252B;
+}
+
+QPushButton#menuHomeButton {
+    padding-left: 17px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+QPushButton#menuDownloadButton {
+    padding-left: 17px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+QPushButton#menuUpdateButton {
+    padding-left: 17px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+QPushButton#menuRepoButton {
+    padding-left: 17px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+QPushButton#menuToggleButton {
+    padding-left: 15px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+QPushButton#menuGithubButton {
+    padding-left: 17px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+QPushButton.menuButton {
+    background-color: #21252B;
+
+    border: 0;
+
+    font-family: "Times New Roman";
+    font-size: 20pt;
+
+    color: #FFFFFF;
+    text-align: left;
+
+    min-width: 300px;
+    max-width: 300px;
+}
+
+QPushButton.menuButton:hover {
+    background-color: #282C34;
+}
+
+QPushButton.menuButton:pressed {
+    background-color: #BD93F9;
+}
