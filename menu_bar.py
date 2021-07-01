@@ -5,10 +5,11 @@ from PySide6 import QtWidgets, QtGui, QtCore
 
 
 class MenuBar:
-    def __init__(self, parent, window, app):
+    def __init__(self, parent, window, app, stacked_widget):
         self.app = app
         self.parent = parent
         self.window = window
+        self.stacked_widget = stacked_widget
         self.menu_active = False
 
         self.menu_frame = QtWidgets.QFrame(parent)
@@ -34,14 +35,16 @@ class MenuBar:
         self.menu_home_button.setObjectName("menuHomeButton")
         self.menu_home_button.setProperty("class", "menuButton")
         self.menu_home_button.setIconSize(QtCore.QSize(20, 20))
+        self.menu_home_button.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(0))
         self.menu_button_layout.addWidget(self.menu_home_button)
 
         self.menu_download_button = QtWidgets.QPushButton(self.menu_button_frame)
         self.menu_download_button.setIcon(QtGui.QPixmap("menu_icons/download.png"))
-        self.menu_download_button.setText("  Download")
+        self.menu_download_button.setText("  Download Video")
         self.menu_download_button.setObjectName("menuDownloadButton")
         self.menu_download_button.setProperty("class", "menuButton")
         self.menu_download_button.setIconSize(QtCore.QSize(20, 20))
+        self.menu_download_button.clicked.connect(lambda: self.stacked_widget.setCurrentIndex(1))
         self.menu_button_layout.addWidget(self.menu_download_button)
 
         self.menu_github_button = QtWidgets.QPushButton(self.menu_button_frame)
