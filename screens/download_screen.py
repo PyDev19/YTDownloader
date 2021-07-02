@@ -49,6 +49,12 @@ class DownloadScreen:
         self.progress_bar.hide()
         self.entry_layout.addWidget(self.progress_bar)
 
+        self.icon = QtGui.QIcon(r"icons\icon.ico")
+        self.message_box = QtWidgets.QMessageBox()
+        self.message_box.setWindowTitle("YT Downloader")
+        self.message_box.setStyleSheet("QLabel{min-width: 300px;font-size:12pt;font-family: 'Times New Roman'}")
+        self.message_box.setWindowIcon(self.icon)
+
         self.stacked_widget.addWidget(self.download_screen_frame)
 
     def choose_directory(self):
@@ -69,31 +75,37 @@ class DownloadScreen:
             request = requests.get(url, timeout=timeout)
         except (requests.ConnectionError, requests.Timeout) as exception:
             self.progress_bar.hide()
-            ctypes.windll.user32.MessageBoxW(0, "You are not connected to the internet", "Error", 0)
+            self.message_box.setText("Error")
+            self.message_box.setInformativeText("You are not connected to the internet")
+            self.message_box.exec_()
             return
 
         if link == "":
             self.progress_bar.hide()
-            ctypes.windll.user32.MessageBoxW(0, "Youtube link is required", "Error", 0)
+            self.message_box.setText("Error")
+            self.message_box.setInformativeText("Youtube link is required")
+            self.message_box.exec_()
             return
         elif file_name == "":
             self.progress_bar.hide()
-            ctypes.windll.user32.MessageBoxW(0, "File name is required", "Error", 0)
-            return
-        elif file_name == "":
-            self.progress_bar.hide()
-            ctypes.windll.user32.MessageBoxW(0, "File name is required", "Error", 0)
+            self.message_box.setText("Error")
+            self.message_box.setInformativeText("File name is required")
+            self.message_box.exec_()
             return
         elif output_dir == "":
             self.progress_bar.hide()
-            ctypes.windll.user32.MessageBoxW(0, "Output directory is required", "Error", 0)
+            self.message_box.setText("Error")
+            self.message_box.setInformativeText("Output directory is required")
+            self.message_box.exec_()
             return
 
         try:
             yt = YouTube(link)
         except exceptions.PytubeError as e:
             self.progress_bar.hide()
-            ctypes.windll.user32.MessageBoxW(0, "YouTube video link is invalid", "Error", 0)
+            self.message_box.setText("Error")
+            self.message_box.setInformativeText("YouTube video link is invalid")
+            self.message_box.exec_()
             return
 
         self.app.processEvents()
@@ -115,6 +127,9 @@ class DownloadScreen:
 
         self.progress_bar.reset()
         self.progress_bar.hide()
-        ctypes.windll.user32.MessageBoxW(0, "Done Downloading Video!", "Info", 0)
+        
+        self.message_box.setText("Info")
+        self.message_box.setInformativeText("Done Downloading Video!")
+        self.message_box.exec_()
 
         self.app.processEvents()
