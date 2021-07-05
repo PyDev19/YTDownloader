@@ -27,6 +27,12 @@ class DownloadScreen:
         self.filename_entry.setProperty("class", "downloadScreenEntry")
         self.entry_layout.addWidget(self.filename_entry)
 
+        self.output_entry = QtWidgets.QLineEdit(self.download_screen_frame)
+        self.output_entry.setPlaceholderText("Output Directory")
+        self.output_entry.setProperty("class", "downloadScreenEntry")
+        self.output_entry.setReadOnly(True)
+        self.entry_layout.addWidget(self.output_entry)
+
         self.output_button = QtWidgets.QPushButton(self.download_screen_frame)
         self.output_button.setText("Choose Output Folder")
         self.output_button.setProperty("class", "downloadScreenButton")
@@ -59,13 +65,14 @@ class DownloadScreen:
         dialog = QtWidgets.QFileDialog()
         dialog.setDirectory(r"C:\Users\User\Desktop")
         self.output_directory = dialog.getExistingDirectory(None, "Select Output Folder")
+        self.output_entry.setText(self.output_directory)
 
     def download_video(self):
         url = "https://yamiatem.github.io/YTDownloader/"
         timeout = 5
         link = self.link_entry.text()
         file_name = self.filename_entry.text()
-        output_dir = self.output_directory
+        output_dir = self.output_entry.text()
         self.progress_bar.show()
         self.app.processEvents()
 
