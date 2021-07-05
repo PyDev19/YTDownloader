@@ -73,4 +73,4 @@ menu_bar = MenuBar(main_frame, window, app, stacked_widget)
 window.resizeEvent = window_resize
 
 window.show()
-sys.exit(app.exec_())
+sys.exit(app.exec())
