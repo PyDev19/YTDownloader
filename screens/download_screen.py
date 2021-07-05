@@ -1,5 +1,3 @@
-import ctypes
-
 import requests
 from PySide6 import QtWidgets, QtCore, QtGui
 from pytube import YouTube, exceptions
@@ -82,19 +80,19 @@ class DownloadScreen:
 
         if link == "":
             self.progress_bar.hide()
-            self.message_box.setText("Error")
+            self.message_box.setText("<strong>Error</strong>")
             self.message_box.setInformativeText("Youtube link is required")
             self.message_box.exec_()
             return
         elif file_name == "":
             self.progress_bar.hide()
-            self.message_box.setText("Error")
+            self.message_box.setText("<strong>Error</strong>")
             self.message_box.setInformativeText("File name is required")
             self.message_box.exec_()
             return
         elif output_dir == "":
             self.progress_bar.hide()
-            self.message_box.setText("Error")
+            self.message_box.setText("<strong>Error</strong>")
             self.message_box.setInformativeText("Output directory is required")
             self.message_box.exec_()
             return
@@ -103,7 +101,7 @@ class DownloadScreen:
             yt = YouTube(link)
         except exceptions.PytubeError as e:
             self.progress_bar.hide()
-            self.message_box.setText("Error")
+            self.message_box.setText("<strong>Error</strong>")
             self.message_box.setInformativeText("YouTube video link is invalid")
             self.message_box.exec_()
             return
@@ -127,8 +125,8 @@ class DownloadScreen:
 
         self.progress_bar.reset()
         self.progress_bar.hide()
-        
-        self.message_box.setText("Info")
+
+        self.message_box.setText("<b>Info</b>")
         self.message_box.setInformativeText("Done Downloading Video!")
         self.message_box.exec_()
 
