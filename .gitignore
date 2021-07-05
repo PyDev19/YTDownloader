@@ -4,3 +4,4 @@ build/*
 *.pyc
 *.exe
 installer_files/*
+installer_folders/*
