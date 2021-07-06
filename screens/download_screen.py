@@ -1,6 +1,7 @@
 import requests
 from PySide6 import QtWidgets, QtCore, QtGui
 from pytube import YouTube, exceptions
+import os
 
 
 class DownloadScreen:
@@ -20,17 +21,19 @@ class DownloadScreen:
         self.link_entry = QtWidgets.QLineEdit(self.download_screen_frame)
         self.link_entry.setPlaceholderText("YouTube Video Link")
         self.link_entry.setProperty("class", "downloadScreenEntry")
+        self.link_entry.textChanged.connect(self.on_change_text)
         self.entry_layout.addWidget(self.link_entry)
 
         self.filename_entry = QtWidgets.QLineEdit(self.download_screen_frame)
         self.filename_entry.setPlaceholderText("File Name")
         self.filename_entry.setProperty("class", "downloadScreenEntry")
+        self.filename_entry.textChanged.connect(self.on_change_text)
         self.entry_layout.addWidget(self.filename_entry)
 
         self.output_entry = QtWidgets.QLineEdit(self.download_screen_frame)
         self.output_entry.setPlaceholderText("Output Directory")
         self.output_entry.setProperty("class", "downloadScreenEntry")
-        self.output_entry.setReadOnly(True)
+        self.output_entry.textChanged.connect(self.on_change_text)
         self.entry_layout.addWidget(self.output_entry)
 
         self.output_button = QtWidgets.QPushButton(self.download_screen_frame)
@@ -43,6 +46,7 @@ class DownloadScreen:
         self.download_button.setText("Download Video")
         self.download_button.setProperty("class", "downloadScreenButton")
         self.download_button.clicked.connect(lambda: self.download_video())
+        self.download_button.setDisabled(True)
         self.entry_layout.addWidget(self.download_button)
 
         self.progress_bar = QtWidgets.QProgressBar(self.download_screen_frame)
@@ -56,10 +60,20 @@ class DownloadScreen:
         self.icon = QtGui.QIcon(r"icons\icon.ico")
         self.message_box = QtWidgets.QMessageBox()
         self.message_box.setWindowTitle("YT Downloader")
-        self.message_box.setStyleSheet("QLabel{min-width: 300px;font-size:12pt;font-family: 'Times New Roman'}")
+        self.message_box.setStyleSheet("QLabel{min-width: 300px;font-size:15pt;font-family: 'Times New Roman'}")
         self.message_box.setWindowIcon(self.icon)
 
         self.stacked_widget.addWidget(self.download_screen_frame)
+
+    def on_change_text(self):
+        if self.link_entry.text() == "":
+            self.download_button.setDisabled(True)
+        elif self.filename_entry.text() == "":
+            self.download_button.setDisabled(True)
+        elif self.output_entry.text() == "" or self.output_directory == "":
+            self.download_button.setDisabled(True)
+        else:
+            self.download_button.setDisabled(False)
 
     def choose_directory(self):
         dialog = QtWidgets.QFileDialog()
@@ -80,7 +94,7 @@ class DownloadScreen:
             request = requests.get(url, timeout=timeout)
         except (requests.ConnectionError, requests.Timeout) as exception:
             self.progress_bar.hide()
-            self.message_box.setText("Error")
+            self.message_box.setText("<b>Error</b>")
             self.message_box.setInformativeText("You are not connected to the internet")
             self.message_box.exec_()
             return
@@ -103,6 +117,11 @@ class DownloadScreen:
             self.message_box.setInformativeText("Output directory is required")
             self.message_box.exec_()
             return
+        elif not os.path.isdir(output_dir):
+            self.progress_bar.hide()
+            self.message_box.setText("<strong>Error</strong>")
+            self.message_box.setInformativeText("Output directory doesn't exist")
+            self.message_box.exec_()
 
         try:
             yt = YouTube(link)
