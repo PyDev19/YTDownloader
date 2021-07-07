@@ -1,7 +1,8 @@
+import os
+
 import requests
 from PySide6 import QtWidgets, QtCore, QtGui
 from pytube import YouTube, exceptions
-import os
 
 
 class DownloadScreen:
