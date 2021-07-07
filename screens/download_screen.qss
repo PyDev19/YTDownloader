@@ -1,6 +1,12 @@
 QLineEdit.downloadScreenEntry {
     font-size: 30pt;
     font-family: "Times New Roman";
+    background-color: #282C34;
+    border: none;
+    border-bottom-width: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #393f4a;
+    color: #FFFFFF;
 }
 
 QPushButton.downloadScreenButton {
