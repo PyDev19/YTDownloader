@@ -94,7 +94,7 @@ class DownloadScreen:
             request = requests.get(url, timeout=timeout)
         except (requests.ConnectionError, requests.Timeout) as exception:
             self.progress_bar.hide()
-            self.message_box.setText("<b>Error</b>")
+            self.message_box.setText("<strong>Error</strong>")
             self.message_box.setInformativeText("You are not connected to the internet")
             self.message_box.exec_()
             return
