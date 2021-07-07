@@ -71,7 +71,7 @@ class DownloadScreen:
             self.download_button.setDisabled(True)
         elif self.filename_entry.text() == "":
             self.download_button.setDisabled(True)
-        elif self.output_entry.text() == "" or self.output_directory == "":
+        elif self.output_entry.text() == "":
             self.download_button.setDisabled(True)
         else:
             self.download_button.setDisabled(False)

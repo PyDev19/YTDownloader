@@ -3,9 +3,17 @@ QLineEdit.downloadScreenEntry {
     font-family: "Times New Roman";
     background-color: #282C34;
     border: none;
-    border-bottom-width: 5px;
+    border-bottom-width: 2px;
     border-bottom-style: solid;
     border-bottom-color: #393f4a;
+}
+
+QLineEdit.downloadScreenEntry:hover {
+    border-bottom-color: #FFFFFF;
+}
+
+QLineEdit.downloadScreenEntry:focus {
+    border-bottom-color: #BD93F9;
     color: #FFFFFF;
 }
 
