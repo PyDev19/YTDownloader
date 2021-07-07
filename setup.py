@@ -2,7 +2,7 @@ import sys
 from cx_Freeze import setup, Executable
 
 # ADD FILES
-files = ['icons/icon.ico', 'icons/', 'menu_bar.py', 'main.qss', 'menu_bar.qss', 'screens/', 'menu_icons/']
+files = ['icons/', 'menu_bar.py', 'main.qss', 'menu_bar.qss', 'screens/', 'menu_icons/']
 
 build_exe_options = {"packages": ["os"], 'include_files': files}
 
