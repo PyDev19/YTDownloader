@@ -88,7 +88,6 @@ class DownloadScreen:
         file_name = self.filename_entry.text()
         output_dir = self.output_entry.text()
         self.progress_bar.show()
-        self.app.processEvents()
 
         try:
             request = requests.get(url, timeout=timeout)
@@ -132,12 +131,8 @@ class DownloadScreen:
             self.message_box.exec_()
             return
 
-        self.app.processEvents()
-
         video = yt.streams.filter(progressive=True, mime_type="video/mp4", file_extension="mp4").first()
         file_size = video.filesize
-
-        self.app.processEvents()
 
         def video_progress(chunk, file_handler, bytes_remaining):
             percent = abs(round((float(bytes_remaining) / float(file_size) * float(100)) - 100))
@@ -147,13 +142,9 @@ class DownloadScreen:
         yt.register_on_progress_callback(video_progress)
         video.download(output_path=output_dir, filename=file_name)
 
-        self.app.processEvents()
-
         self.progress_bar.reset()
         self.progress_bar.hide()
 
         self.message_box.setText("<b>Info</b>")
         self.message_box.setInformativeText("Done Downloading Video!")
         self.message_box.exec_()
-
-        self.app.processEvents()
