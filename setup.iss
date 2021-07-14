@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "YT Downloader"
-#define MyAppVersion "3.0"
+#define MyAppVersion "3.1.0"
 #define MyAppPublisher "PyDev19"
 #define MyAppURL "https://github.com/PyDev19/YTDownloader"
 #define MyAppExeName "main.exe"
@@ -10,7 +10,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{FB8C4045-059D-4F33-9718-6091F01A3528}
+AppId={{44BBA8D6-057D-4890-A5E7-15A67D10ED72}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -22,11 +22,11 @@ DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=C:\Users\User\Desktop\LICENSE.txt
-; Uncomment the following line to run in non administrative install mode (install for current user only.)
-;PrivilegesRequired=lowest
+; Remove the following line to run in administrative install mode (install for all users.)
+PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader
-OutputBaseFilename=YTDownloader-3.0-windows
+OutputBaseFilename=YTDownload-3.1.0-windows
 SetupIconFile=C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\icons\icon.ico
 Compression=lzma
 SolidCompression=yes
@@ -39,14 +39,13 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\installer_files\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\installer_files\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\installer_files\main.qss"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\installer_files\menu_bar.py"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\installer_files\menu_bar.qss"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\installer_files\python3.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\installer_files\python39.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\installer_folders\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\main.qss"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\menu_bar.pyc"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\menu_bar.qss"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\python3.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\python39.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\folders\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

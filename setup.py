@@ -17,8 +17,8 @@ target = Executable(
 )
 
 setup(
-    name="Test",
-    version="1.0",
+    name="YT Downloader",
+    version="3.1",
     description="Test",
     author="Test",
     options={'build_exe': build_exe_options},
