@@ -1,8 +1,6 @@
-import os
-
-import requests
 from PySide6 import QtWidgets, QtCore, QtGui
-from pytube import YouTube, exceptions
+
+from screens.downloader import Downloader
 
 
 class DownloadScreen:
@@ -64,6 +62,8 @@ class DownloadScreen:
         self.message_box.setStyleSheet("QLabel{min-width: 300px;font-size:15pt;font-family: 'Times New Roman'}")
         self.message_box.setWindowIcon(self.icon)
 
+        self.downloader = Downloader(self.app, self.progress_bar, self.message_box, self.link_entry, self.filename_entry
+                                     , self.output_entry)
         self.stacked_widget.addWidget(self.download_screen_frame)
 
     def on_change_text(self):
@@ -83,69 +83,4 @@ class DownloadScreen:
         self.output_entry.setText(self.output_directory)
 
     def download_video(self):
-        url = "https://yamiatem.github.io/YTDownloader/"
-        timeout = 5
-        link = self.link_entry.text()
-        file_name = self.filename_entry.text()
-        output_dir = self.output_entry.text()
-        self.progress_bar.show()
-
-        try:
-            request = requests.get(url, timeout=timeout)
-        except (requests.ConnectionError, requests.Timeout) as exception:
-            self.progress_bar.hide()
-            self.message_box.setText("<strong>Error</strong>")
-            self.message_box.setInformativeText("You are not connected to the internet")
-            self.message_box.exec_()
-            return
-
-        if link == "":
-            self.progress_bar.hide()
-            self.message_box.setText("<strong>Error</strong>")
-            self.message_box.setInformativeText("Youtube link is required")
-            self.message_box.exec_()
-            return
-        elif file_name == "":
-            self.progress_bar.hide()
-            self.message_box.setText("<strong>Error</strong>")
-            self.message_box.setInformativeText("File name is required")
-            self.message_box.exec_()
-            return
-        elif output_dir == "":
-            self.progress_bar.hide()
-            self.message_box.setText("<strong>Error</strong>")
-            self.message_box.setInformativeText("Output directory is required")
-            self.message_box.exec_()
-            return
-        elif not os.path.isdir(output_dir):
-            self.progress_bar.hide()
-            self.message_box.setText("<strong>Error</strong>")
-            self.message_box.setInformativeText("Output directory doesn't exist")
-            self.message_box.exec_()
-
-        try:
-            yt = YouTube(link)
-        except exceptions.PytubeError as e:
-            self.progress_bar.hide()
-            self.message_box.setText("<strong>Error</strong>")
-            self.message_box.setInformativeText("YouTube video link is invalid")
-            self.message_box.exec_()
-            return
-
-        video = yt.streams.filter(progressive=True, mime_type="video/mp4", file_extension="mp4").first()
-        file_size = video.filesize
-
-        def video_progress(chunk, file_handler, bytes_remaining):
-            percent = abs(round((float(bytes_remaining) / float(file_size) * float(100)) - 100))
-            self.progress_bar.setValue(percent)
-            self.app.processEvents()
-
-        yt.register_on_progress_callback(video_progress)
-        video.download(output_path=output_dir, filename=file_name)
-
-        self.progress_bar.reset()
-        self.progress_bar.hide()
-
-        self.message_box.setText("<b>Info</b>")
-        self.message_box.setInformativeText("Done Downloading Video!")
-        self.message_box.exec_()
+        self.downloader.download_video()
