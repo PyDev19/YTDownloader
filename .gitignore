@@ -1,7 +1,5 @@
 .idea/*
-node_modules/*
 build/*
 *.pyc
 *.exe
-installer_files/*
-installer_folders/*
+venv/*
