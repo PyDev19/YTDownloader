@@ -4,13 +4,13 @@
 #define MyAppName "YT Downloader"
 #define MyAppVersion "3.1.0"
 #define MyAppPublisher "PyDev19"
-#define MyAppURL "https://github.com/PyDev19/YTDownloader"
+#define MyAppURL "https://github.com/PyDev19/YTDownloader/"
 #define MyAppExeName "main.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{44BBA8D6-057D-4890-A5E7-15A67D10ED72}
+AppId={{F8AC73F5-E91D-4776-934E-02D304E2534F}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -21,16 +21,17 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=C:\Users\User\Desktop\LICENSE.txt
+LicenseFile=D:\Personal Projects\YTDownloader\LICENSE
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader
-OutputBaseFilename=YTDownload-3.1.0-windows
-SetupIconFile=C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\icons\icon.ico
+OutputDir=D:\Personal Projects\YTDownloader
+OutputBaseFilename=YTDownloader-3.1.0-Windows
+SetupIconFile=D:\Personal Projects\YTDownloader\icons\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
+UninstallDisplayIcon={app}\{#MyAppExeName}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -39,18 +40,18 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\main.qss"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\menu_bar.pyc"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\menu_bar.qss"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\python3.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\python39.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\User\Desktop\PythonProjects\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\folders\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\main.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\main.qss"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\menu_bar.pyd"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\menu_bar.qss"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\python3.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\python39.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Personal Projects\YTDownloader\build\exe.win-amd64-3.9\folders\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
