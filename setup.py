@@ -19,8 +19,8 @@ target = Executable(
 setup(
     name="YT Downloader",
     version="3.1",
-    description="Test",
-    author="Test",
+    description="Python app that downloads youtube videos",
+    author="PyDev19",
     options={'build_exe': build_exe_options},
     executables=[target]
 )
