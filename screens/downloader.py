@@ -19,6 +19,7 @@ class Downloader:
         timeout = 5
         link = self.link_entry.text()
         file_name = self.filename_entry.text()
+        file_name = file_name + ".mp4"
         output_dir = self.output_entry.text()
         self.progress_bar.show()
 
