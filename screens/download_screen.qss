@@ -6,6 +6,7 @@ QLineEdit.downloadScreenEntry {
     border-bottom-width: 2px;
     border-bottom-style: solid;
     border-bottom-color: #393f4a;
+    color: #14161A;
 }
 
 QLineEdit.downloadScreenEntry:hover {
