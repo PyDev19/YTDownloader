@@ -101,6 +101,8 @@ ApplicationWindow {
 
                 button_text: qsTr("  Github")
                 icon_source: "qrc:/menu_icons/menu_icons/github.png"
+
+                onClicked: Qt.openUrlExternally("https://github.com/PyDev19");
             }
 
             MenuButton {
@@ -108,6 +110,8 @@ ApplicationWindow {
 
                 button_text: qsTr("  Repository")
                 icon_source: "qrc:/menu_icons/menu_icons/repository.png"
+
+                onClicked: Qt.openUrlExternally("https://github.com/PyDev19/YTDownloader/");
             }
         }
     }
