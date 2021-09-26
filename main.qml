@@ -102,6 +102,13 @@ ApplicationWindow {
                 button_text: qsTr("  Github")
                 icon_source: "qrc:/menu_icons/menu_icons/github.png"
             }
+
+            MenuButton {
+                id: repo_menu_button
+
+                button_text: qsTr("  Repository")
+                icon_source: "qrc:/menu_icons/menu_icons/repository.png"
+            }
         }
     }
 
