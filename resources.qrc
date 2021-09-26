@@ -1,0 +1,20 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource prefix="/menu_icons">
+    <file>menu_icons/menu.png</file>
+    <file>menu_icons/menu_2.png</file>
+    <file>menu_icons/home.png</file>
+    <file>menu_icons/download.png</file>
+    <file>menu_icons/github.png</file>
+    <file>menu_icons/repository.png</file>
+    <file>menu_icons/update.png</file>
+</qresource>
+<qresource prefix="/icons">
+    <file>icons/icon.ico</file>
+    <file>icons/icon-512x512.png</file>
+    <file>icons/icon-192x192.png</file>
+    <file>icons/icon-180x180.png</file>
+    <file>icons/icon-32x32.png</file>
+    <file>icons/icon-16x16.png</file>
+</qresource>
+</RCC>
