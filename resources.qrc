@@ -8,6 +8,9 @@
     <file>menu_icons/github.png</file>
     <file>menu_icons/repository.png</file>
     <file>menu_icons/update.png</file>
+    <file>menu_icons/close.png</file>
+    <file>menu_icons/minimize.png</file>
+    <file>menu_icons/settings.png</file>
 </qresource>
 <qresource prefix="/icons">
     <file>icons/icon.ico</file>
