@@ -19,5 +19,6 @@
     <file>icons/icon-180x180.png</file>
     <file>icons/icon-32x32.png</file>
     <file>icons/icon-16x16.png</file>
+    <file>icons/internet_disconnected.png</file>
 </qresource>
 </RCC>
