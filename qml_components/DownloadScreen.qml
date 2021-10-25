@@ -1,8 +1,8 @@
 import QtQuick 6.0
-import QtQuick.Controls	6.0
+import QtQuick.Controls	6.1
 import QtQuick.Controls.Material 6.0
 import QtQuick.Layouts 6.0
-import Qt.labs.platform 1.0
+import Qt.labs.platform 1.1
 
 Rectangle {
     id: download_screen
@@ -16,6 +16,26 @@ Rectangle {
     anchors.leftMargin: 0
     anchors.bottomMargin: 0
     anchors.topMargin: 0
+
+    Popup {
+        id: popup
+        width: 700
+        height: 500
+        modal: true
+        focus: true
+
+        property string error_code: "internet_disconnected"
+        
+        anchors.centerIn: parent
+
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+
+        Image {
+            id: internet_disconnected_icon
+
+            source: "qrc:/icons/icons/internet_disconnected.png"
+        }
+    }
 
     FolderDialog {
         id: folder_dialog
@@ -132,5 +152,12 @@ Rectangle {
         anchors.rightMargin: 150
         anchors.leftMargin: 150
         anchors.topMargin: 25
+
+        onClicked: {
+            console.log(backend.check_internet());
+            if (backend.check_internet()) {
+                popup.open()
+            }
+        }
     }
 }
