@@ -13,8 +13,7 @@ backend = BackEnd(app)
 
 engine = QQmlApplicationEngine()
 engine.quit.connect(app.quit)
-
-engine.rootContext().setContextProperty("backend", backend)
 engine.load('main.qml')
+engine.rootContext().setContextProperty('backend', backend)
 
 sys.exit(app.exec())
