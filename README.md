@@ -1,2 +1,2 @@
 # YTDownloader
-Python app that downloads videos from youtube
+Python app that downloads videos from YouTube
