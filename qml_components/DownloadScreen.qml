@@ -29,11 +29,108 @@ Rectangle {
         anchors.centerIn: parent
 
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-
+        
         Image {
             id: internet_disconnected_icon
 
             source: "qrc:/icons/icons/internet_disconnected.png"
+        }
+
+        Label {
+            id: internet_disconnected_title
+
+            text: qsTr("You're not connected to the internet")
+            font {
+                bold: true
+                family: "Times New Roman"
+                pointSize: 25
+            }
+
+            anchors{
+                top: internet_disconnected_icon.bottom
+                topMargin: 25
+            }
+        }
+
+        Label {
+            id: internet_disconnected_try
+
+            text: qsTr("Try: ")
+            font {
+                bold: true
+                family: "Times New Roman"
+                pointSize: 15
+            }
+
+            anchors{
+                top: internet_disconnected_icon.bottom
+                topMargin: 70
+            }
+        }
+
+        Label {
+            id: internet_disconnected_suggestion_1
+
+            text: qsTr("  Checking your network cables, modem, and routers")
+            font {
+                family: "Times New Roman"
+                pointSize: 15
+            }
+
+            anchors{
+                top: internet_disconnected_icon.bottom
+                topMargin: 100
+            }
+        }
+
+        Label {
+            id: internet_disconnected_suggestion_2
+            text: qsTr("  Reconnecting to your wireless network")
+            font {
+                family: "Times New Roman"
+                pointSize: 15
+            }
+
+            anchors{
+                top: internet_disconnected_icon.bottom
+                topMargin: 130
+            }
+        }
+
+        Label {
+            id: internet_disconnected_suggestion_3
+            text: qsTr("  Running Windows Network Diagnostics")
+            font {
+                family: "Times New Roman"
+                pointSize: 15
+            }
+
+            anchors{
+                top: internet_disconnected_icon.bottom
+                topMargin: 160
+            }
+        }
+
+        Button{
+            id: retry_button
+
+            font.family: "Times New Roman"
+            font.pointSize: 25
+            text: "Retry"
+
+            anchors.top: parent.top
+            anchors.left: parent.left
+
+            anchors.leftMargin: 575
+            anchors.topMargin: 425
+
+            onClicked: {
+                popup.close()
+                
+                if (backend.check_internet()) {
+                    popup.open()
+                }
+            }
         }
     }
 

@@ -17,6 +17,6 @@ class BackEnd(QObject):
 
         try:
             request = requests.get(url, timeout=timeout)
-            return True
-        except (requests.ConnectionError, requests.Timeout) as exception:
             return False
+        except (requests.ConnectionError, requests.Timeout) as exception:
+            return True
