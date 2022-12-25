@@ -22,9 +22,6 @@ ApplicationWindow {
 
     Material.theme: Material.Dark
 
-    property int previous_x
-    property int previous_y
-
     QtObject{
         id: funtions
 
@@ -44,96 +41,6 @@ ApplicationWindow {
         }
     }
 
-    MouseArea {
-        id: top_area
-        height: 5
-        
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-
-        cursorShape: Qt.SizeVerCursor
-
-        onPressed: {
-            previous_y = mouseY
-        }
-
-        onMouseYChanged: {
-            var dy = mouseY - previous_y
-            window.setY(window.y + dy)
-            window.setHeight(window.height - dy)
-        }
-    }
-
-    MouseArea {
-        id: bottom_area
-        height: 5
-
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-
-        cursorShape: Qt.SizeVerCursor
- 
-        onPressed: {
-            previous_y = mouseY
-        }
- 
-        onMouseYChanged: {
-            var dy = mouseY - previous_y
-            window.setHeight(window.height + dy)
-        }
-    }
-
-    MouseArea {
-        id: left_area
-        width: 5
-
-        anchors {
-            top: top_area.bottom
-            bottom: bottom_area.top
-            left: parent.left
-        }
-
-        cursorShape: Qt.SizeHorCursor
- 
-        onPressed: {
-            previous_x = mouseX
-        }
- 
-        onMouseXChanged: {
-            var dx = mouseX - previous_x
-            window.setX(window.x + dx)
-            window.setWidth(window.width - dx)
-        }
-    }
-
-    MouseArea {
-        id: right_area
-        width: 5
-
-        anchors {
-            top: top_area.bottom
-            bottom: bottom_area.top
-            right: parent.right
-        }
-
-        cursorShape: Qt.SizeHorCursor
- 
-        onPressed: {
-            previous_x = mouseX
-        }
- 
-        onMouseXChanged: {
-            var dx = mouseX - previous_x
-            window.setWidth(window.width + dx)
-        }
-    }
-
     Rectangle {
         id: top_bar
         height: 50
@@ -148,20 +55,16 @@ ApplicationWindow {
 
         MouseArea {
             anchors.fill: parent
-    
+
+            property variant click_pos: "1,1"
+
             onPressed: {
-                previous_x = mouseX
-                previous_y = mouseY
+                click_pos  = Qt.point(mouseX, mouseY)
             }
-    
-            onMouseXChanged: {
-                var dx = mouseX - previous_x
-                window.setX(window.x + dx)
-            }
-    
-            onMouseYChanged: {
-                var dy = mouseY - previous_y
-                window.setY(window.y + dy)
+
+            onPositionChanged: {
+                window.x = backend.cursor_pos().x - click_pos.x
+                window.y = backend.cursor_pos().y - click_pos.y
             }
         }
 
