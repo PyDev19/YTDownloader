@@ -1,4 +1,13 @@
+certifi
+charset-normalizer
+cx-Freeze
+cx-Logging
+idna
+importlib-metadata
 PySide6
-requests
 pytube
-cx_Freeze
+requests
+shiboken6
+typing-extensions
+urllib3
+zipp
