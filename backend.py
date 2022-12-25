@@ -1,7 +1,8 @@
 import os
 
 import requests
-from PySide6.QtCore import Slot, QObject
+from PySide6.QtCore import Slot, QObject, QPoint
+from PySide6.QtGui import QCursor
 from pytube import YouTube, exceptions
 
 class BackEnd(QObject):
@@ -20,3 +21,7 @@ class BackEnd(QObject):
             return False
         except (requests.ConnectionError, requests.Timeout) as exception:
             return True
+    
+    @Slot(result=QPoint)
+    def cursor_pos(self):
+        return QCursor.pos()
