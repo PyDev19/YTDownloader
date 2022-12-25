@@ -15,7 +15,7 @@ Button {
     anchors.rightMargin: 20
 
     Image {
-        source: icon_source
+        source: parent.icon_source
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
