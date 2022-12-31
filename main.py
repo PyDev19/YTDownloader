@@ -7,7 +7,7 @@ from backend import BackEnd
 import resources_rc
 
 app = QGuiApplication(sys.argv)
-app.setWindowIcon(QIcon(r"icons\icon.ico"))
+app.setWindowIcon(QIcon(r"icon.ico"))
 
 backend = BackEnd(app)
 
